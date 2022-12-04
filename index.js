@@ -4,6 +4,7 @@ var cors    = require('cors');
 const res   = require('express/lib/response');
 const req   = require('express/lib/request');
 var dal     = require('./dal.js');
+const lowdb = require('lowdb');
 
 // used to serve static files from public directory
 app.use(express.static('public'));
