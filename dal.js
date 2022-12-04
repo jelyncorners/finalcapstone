@@ -14,7 +14,7 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function (err, client) {
 });
 
 if (process.env.NODE_ENV ==='production'){
-    append.use(express.static('public/build'));
+    append.use(express.static('build'));
 }
 
 // create user account
