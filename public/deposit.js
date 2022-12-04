@@ -1,61 +1,41 @@
-function Deposit(){
-    const [show, setShow]     = React.useState(true);
-    const [status, setStatus] = React.useState(' ');
+function Deposit() {
+    const ctx = React.useContext(UserContext); 
+    const [status, setStatus]     = React.useState(true);
 
-    return(
-        <Card
-            bgcolor="warning"
-            header="Deposit"
-            status={status}
-            body={show ?
-                <DepositForm setShow={setShow}/> :
-                <DepositMsg setShow={setShow}/>}
-        />
-    )
-}
+    function depositAmount() {
+        if (ctx.user!=='') { 
+        setStatus(`$${ctx.balance} deposit successful!`);
+        setTimeout(() => setStatus(''),2000);
 
-function DepositMsg(props){
-    return(<>
-    <h5>Deposit Amount</h5>
-    <button type="submit"
-        className="btn btn-light"
-        onClick={() => props.setShow(true)}>Success!</button>
-        </>);
-}
-
-function DepositForm(props){
-    const [email, setEmail]       = React.useState('');
-    const [amount, setAmount] = React.useState('');
-    
-    function handle(){
-        console.log(email,amount);
-        const url = `/account/deposit/${email}/${amount}`;
+        ctx.balance.toString();
+        const url = `/account/deposit/${ctx.user}/${ctx.balance}`;
         (async () => {
             var res = await fetch(url);
             var data = await res.json();
             console.log(data);
         })();
-        props.setShow(false);
+        } else {
+            setStatus('Login to make a deposit');
+            setTimeout(() => setStatus(''),3000);
+        }
     }
-    
-    return (<>
 
-    Email address<br/>
-    <input type="input"
-        className="form-control"
-        placeholder="Enter email"
-        value={email}
-        onChange={e => setEmail(e.currentTarget.value)}/><br/>
-
-    Amount<br/>
-    <input type="number"
-    className="form-control"
-    placeholder="Enter amount"
-    value={amount}
-    onChange={e => setAmount(e.currentTarget.value)}/><br/>
-
-    <button type="submit"
-        className="btn btn-light"
-        onClick={handle}>Deposit</button>
-    </>);
+    return (
+        <Card
+            bgcolor="warning"
+            header="Deposit"
+            text=""
+            status={status}
+            body={
+                <>
+                <CardForm
+                    showName="none"
+                    showPassword="none"
+                    showEmail="none"
+                />
+                {<button type="submit" className="btn btn-light" onClick={depositAmount}>Deposit</button>}
+                </>
+            }
+        />
+    )
 }

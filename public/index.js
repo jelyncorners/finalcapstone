@@ -1,30 +1,32 @@
-function Spa(){
+function Spa() {
+    
     return (
         <HashRouter>
         <div>
-            <NavBar/>
-            <UserContext.Provider value={{users: [{name: 'abel', email: 'abel@mit.edu', password: 'secret', balance: 100}]}}>
+
+            {/*add our shared context*/}
+            <UserContext.Provider value={{user:'',auth:false,name:'',email:'',password:'',balance:'0'}}>
+            {/*get our navbar from navbar.js*/}
+            <NavBar/> 
+
             <div className="container" style={{padding: "20px"}}>
-                <Route path="/" exact component={Home}/>
-                <Route path="/CreateAccount/" component={CreateAccount}/>
-                <Route path="/alldata/" component={AllData}/>
-                <Route path="/balance/" component={Balance}/>
-                <Route path="/deposit/" component={Deposit}/>
-                <Route path="/login/" component={Login}/>
-                <Route path="/withdraw/" component={Withdraw}/>
+                <Route path="/" exact component={Home} />
+                <Route path="/CreateAccount/" component={CreateAccount} />
+                <Route path="/deposit/" component={Deposit} />
+                <Route path="/withdraw/" component={Withdraw} />
+                {/* <Route path="/transactions/" component={Transactions} /> */}
+                <Route path="/balance/" component={Balance} />
+                <Route path="/alldata/" component={AllData} />
             </div>
             </UserContext.Provider>
         </div>
-        </HashRouter>    
-    )
+        </HashRouter>
+    ); 
 }
-
-/*ReactDOM.render(<Spa/>,
+  
+// render our single page application (SPA) at HTML "root"
+ReactDOM.render(
+    <Spa/>,
     document.getElementById('root')
-    );
-    */
-
-    import { createRoot } from 'react-dom/client';
-    const container = document.getElementById('root');
-    const root = createRoot(container); // createRoot(container!) if you use TypeScript
-    root.render(<App tab="home" />);
+);
+  

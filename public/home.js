@@ -1,11 +1,12 @@
-function Home(){
-    return (
-        <Card
-          txtcolor="black"
-          header="Bad Bank Landing Page"
-          title="Welcome to Bad Bank"
-          text="Thank you for being a valued customer!"
-          body={<img src="bank.png" className="img-fluid" alt="Responsive image" />}
-        />
-      );
+function Home() {
+    
+  return (
+      <Card
+          bgcolor="primary"
+          header="Home"
+          status=""
+          text="Welcome to the Bank!"
+          body="Here at BankBad Inc., we pride ourselves on offering the best banking services with minimal security since 2021"
+      />
+  )
 }
